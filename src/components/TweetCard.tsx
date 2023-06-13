@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { TweetProps } from './../types/TweetType';
+import type { TweetProps } from './../types/TweetType';
 import ProfileImage from './ProfileImage';
 import HeartButton from './HeartButton';
 import { api } from "~/utils/api";
@@ -13,7 +13,7 @@ function TweetCard({ id, user, content, createdAt, likeCount, likedByMe}: TweetP
             const updateData: Parameters<typeof trpcUtils.tweet.infiniteFeed.setInfiniteData>[1] = (oldData) => {
                 if (oldData == null) return
                 
-                let countModifier = data.addedLike ? 1 : -1;
+                const countModifier = data.addedLike ? 1 : -1;
 
                 return {
                     ...oldData,

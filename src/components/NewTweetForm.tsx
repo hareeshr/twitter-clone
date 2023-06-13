@@ -1,4 +1,5 @@
-import { useRef, useState, useLayoutEffect, useCallback, FormEvent } from "react";
+import { useRef, useState, useLayoutEffect, useCallback } from "react";
+import type { FormEvent } from "react";
 import Button from "./Button"
 import ProfileImage from "./ProfileImage"
 import { useSession } from "next-auth/react"

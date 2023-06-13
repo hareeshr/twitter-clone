@@ -1,6 +1,6 @@
 import InfiniteScroll from 'react-infinite-scroll-component';
 import TweetCard from './TweetCard';
-import { TweetProps } from './../types/TweetType';
+import type { TweetProps } from './../types/TweetType';
 import LoadingSpinner from './LoadingSpinner';
 
 type InfiniteTweetListProps = {
