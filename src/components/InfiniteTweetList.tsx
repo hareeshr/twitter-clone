@@ -9,14 +9,19 @@ type InfiniteTweetListProps = {
   hasMore: boolean | undefined;
   fetchNewTweets: () => Promise<unknown>;
   tweets?: TweetProps[];
-}
+};
+
 function InfiniteTweetList({ tweets, isError, isLoading, fetchNewTweets, hasMore = false }: InfiniteTweetListProps) {
-  if (isLoading) return <LoadingSpinner />
-  if (isError) return <h1>Error...</h1>
-  if (tweets == null || tweets.length === 0) {
-    return <h2 className="my-4 text-center text-2xl text-gray-500">No Tweets...</h2>
-  }
+  // If the data is loading, render a loading spinner
+  if (isLoading) return <LoadingSpinner />;
   
+  // If there's an error, render an error message
+  if (isError) return <h1>Error...</h1>;
+  
+  // If there are no tweets available, render a message indicating so
+  if (!tweets || tweets.length === 0) {
+    return <h2 className="my-4 text-center text-2xl text-gray-500">No Tweets...</h2>;
+  }
   
   return (
     <ul>
@@ -27,11 +32,11 @@ function InfiniteTweetList({ tweets, isError, isLoading, fetchNewTweets, hasMore
         loader={<LoadingSpinner />}
       >
         {tweets.map(tweet => {
-          return <TweetCard key={tweet.id} {...tweet}/>
+          return <TweetCard key={tweet.id} {...tweet} />;
         })}
       </InfiniteScroll>
     </ul>
-  )
+  );
 }
 
-export default InfiniteTweetList
+export default InfiniteTweetList;

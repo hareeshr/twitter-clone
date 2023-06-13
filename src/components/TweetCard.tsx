@@ -8,7 +8,10 @@ const dateTimeFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: 'short
 
 function TweetCard({ id, user, content, createdAt, likeCount, likedByMe}: TweetProps) {
     const trpcUtils = api.useContext();
+
+    // Toggle like mutation for the tweet
     const toggleLike = api.tweet.toggleLike.useMutation({
+        // Update the data when the mutation succeeds
         onSuccess: (data) => {
             const updateData: Parameters<typeof trpcUtils.tweet.infiniteFeed.setInfiniteData>[1] = (oldData) => {
                 if (oldData == null) return
@@ -35,13 +38,15 @@ function TweetCard({ id, user, content, createdAt, likeCount, likedByMe}: TweetP
                 }
                 
             }
-
+            
+            // Update the infinite feed data for different scenarios
             trpcUtils.tweet.infiniteFeed.setInfiniteData({}, updateData);
             trpcUtils.tweet.infiniteFeed.setInfiniteData({ onlyFollowing: true}, updateData);
             trpcUtils.tweet.infiniteProfileFeed.setInfiniteData({userId: user.id }, updateData);
         }
     })
 
+    // Function to handle the like toggle
     function handleToggleLike() {
         toggleLike.mutate({ id })
     }
